@@ -52,13 +52,49 @@
 </div>
 
 <script>
+<script>
 function detectLocation() {
-  navigator.geolocation.getCurrentPosition(pos => {
-    localStorage.setItem("lat", pos.coords.latitude);
-    localStorage.setItem("lon", pos.coords.longitude);
-    window.location.href = "map.html";
-  });
+  if (!navigator.geolocation) {
+    alert("Geolocation not supported. Please enter coordinates manually.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      localStorage.setItem("lat", pos.coords.latitude);
+      localStorage.setItem("lon", pos.coords.longitude);
+      window.location.href = "map.html";
+    },
+    (err) => {
+      alert(
+        "Location detection failed.\n\n" +
+        "Please enter latitude & longitude manually.\n\n" +
+        "Error: " + err.message
+      );
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,   // ⏱️ 10 seconds
+      maximumAge: 0
+    }
+  );
 }
+
+function goToMap() {
+  const lat = document.getElementById("lat").value;
+  const lon = document.getElementById("lon").value;
+
+  if (!lat || !lon) {
+    alert("Please enter both latitude and longitude.");
+    return;
+  }
+
+  localStorage.setItem("lat", lat);
+  localStorage.setItem("lon", lon);
+  window.location.href = "map.html";
+}
+</script>
+
 
 function goToMap() {
   localStorage.setItem("lat", document.getElementById("lat").value);
