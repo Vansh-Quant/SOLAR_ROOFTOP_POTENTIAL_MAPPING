@@ -1,0 +1,24 @@
+fetch('../output/solar_potential.geojson')
+  .then(res => res.json())
+  .then(data => {
+
+    if (data.features && data.features.length > 0) {
+      const layer = L.geoJSON(data, {
+        style: f => ({
+          color: f.properties.suitability === "Excellent" ? "green" :
+                 f.properties.suitability === "Good" ? "yellow" : "red",
+          fillOpacity: 0.6
+        }),
+        onEachFeature: (f, l) => {
+          l.bindPopup(
+            `Suitability: ${f.properties.suitability}<br>
+             Capacity: ${f.properties.capacity_kw.toFixed(2)} kW`
+          );
+        }
+      }).addTo(map);
+
+      // ✅ ONLY zoom to buildings if they exist
+      map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+    }
+
+  });

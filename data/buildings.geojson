@@ -1,0 +1,24 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "building_id": 1,
+        "roof_type": "RCC"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [75.8945, 27.0300],
+            [75.8949, 27.0300],
+            [75.8949, 27.0303],
+            [75.8945, 27.0303],
+            [75.8945, 27.0300]
+          ]
+        ]
+      }
+    }
+  ]
+}

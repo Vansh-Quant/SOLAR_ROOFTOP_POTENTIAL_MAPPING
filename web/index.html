@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Solar Rooftop Potential Mapping</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input {
+      width: 90%;
+      padding: 8px;
+      margin: 5px 0;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>☀️ Solar Rooftop Potential Mapping</h2>
+  <p>Analyze rooftop solar potential for any location</p>
+
+  <button onclick="detectLocation()">📍 Detect My Location</button>
+
+  <p>OR</p>
+
+  <input type="text" id="lat" placeholder="Latitude">
+  <input type="text" id="lon" placeholder="Longitude">
+
+  <button onclick="goToMap()">Analyze Area</button>
+</div>
+
+<script>
+function detectLocation() {
+  navigator.geolocation.getCurrentPosition(pos => {
+    localStorage.setItem("lat", pos.coords.latitude);
+    localStorage.setItem("lon", pos.coords.longitude);
+    window.location.href = "map.html";
+  });
+}
+
+function goToMap() {
+  localStorage.setItem("lat", document.getElementById("lat").value);
+  localStorage.setItem("lon", document.getElementById("lon").value);
+  window.location.href = "map.html";
+}
+</script>
+
+</body>
+</html>
