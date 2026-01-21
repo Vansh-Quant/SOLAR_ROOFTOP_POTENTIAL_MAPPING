@@ -1,106 +1,228 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Solar Rooftop Potential Mapping</title>
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(120deg, #e6f5ec, #f4f6f8);
+      color: #333;
     }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      color: #0a7c3a;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 22px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .gps-btn {
+      background: #1E90FF;
+      color: white;
+    }
+
+    .manual-btn {
+      background: #0a7c3a;
+      color: white;
+    }
+
     .card {
       background: white;
+      border-radius: 12px;
       padding: 30px;
-      width: 400px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .inputs input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .section {
+      margin-top: 60px;
+    }
+
+    .section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #0a7c3a;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-box {
+      background: white;
+      padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+
+    .footer {
+      margin-top: 80px;
       text-align: center;
-    }
-    input {
-      width: 90%;
-      padding: 8px;
-      margin: 5px 0;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      background: green;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      color: #666;
+      font-size: 14px;
     }
   </style>
 </head>
+
 <body>
 
-<div class="card">
-  <h2>☀️ Solar Rooftop Potential Mapping</h2>
-  <p>Analyze rooftop solar potential for any location</p>
+<div class="container">
 
-  <button onclick="detectLocation()">📍 Detect My Location</button>
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <div>
+      <h1>☀️ Solar Rooftop Potential Mapping</h1>
+      <p>
+        An intelligent mapping system to analyze rooftop solar potential,
+        estimate energy generation, and support clean energy planning for
+        campuses, villages, and smart cities.
+      </p>
 
-  <p>OR</p>
+      <div class="buttons">
+        <button class="gps-btn" onclick="detectLocation()">📍 Detect My Location</button>
+        <button class="manual-btn" onclick="document.getElementById('manual').scrollIntoView({behavior:'smooth'})">
+          ✍️ Enter Coordinates
+        </button>
+      </div>
+    </div>
 
-  <input type="text" id="lat" placeholder="Latitude">
-  <input type="text" id="lon" placeholder="Longitude">
+    <div class="card" id="manual">
+      <h3>Manual Location Input</h3>
+      <div class="inputs">
+        <input type="text" id="lat" placeholder="Latitude (e.g. 27.0301)">
+        <input type="text" id="lon" placeholder="Longitude (e.g. 75.8947)">
+        <button class="manual-btn" onclick="goToMap()">Analyze Area</button>
+      </div>
+    </div>
+  </div>
 
-  <button onclick="goToMap()">Analyze Area</button>
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <h2>How It Works</h2>
+    <div class="features">
+      <div class="feature-box">
+        📍 <b>Select Location</b><br>
+        Choose an area using GPS or coordinates.
+      </div>
+      <div class="feature-box">
+        🏠 <b>Analyze Rooftops</b><br>
+        Identify buildings and assess usable roof area.
+      </div>
+      <div class="feature-box">
+        ☀️ <b>Estimate Solar Potential</b><br>
+        Calculate capacity and energy generation.
+      </div>
+      <div class="feature-box">
+        📊 <b>Visualize Insights</b><br>
+        View results on an interactive map.
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY IT MATTERS -->
+  <div class="section">
+    <h2>Why It Matters</h2>
+    <div class="features">
+      <div class="feature-box">🌱 Supports clean energy adoption</div>
+      <div class="feature-box">🏙️ Enables data-driven urban planning</div>
+      <div class="feature-box">📉 Reduces installation uncertainty</div>
+      <div class="feature-box">🌍 Scalable from villages to cities</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Hackathon Prototype • Solar Rooftop Potential Mapping
+  </div>
+
 </div>
 
 <script>
-<script>
-function detectLocation() {
-  if (!navigator.geolocation) {
-    alert("Geolocation not supported. Please enter coordinates manually.");
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      localStorage.setItem("lat", pos.coords.latitude);
-      localStorage.setItem("lon", pos.coords.longitude);
+  function detectLocation() {
+    function fallback() {
+      localStorage.setItem("lat", 27.0301);
+      localStorage.setItem("lon", 75.8947);
       window.location.href = "map.html";
-    },
-    (err) => {
-      alert(
-        "Location detection failed.\n\n" +
-        "Please enter latitude & longitude manually.\n\n" +
-        "Error: " + err.message
-      );
-    },
-    {
-      enableHighAccuracy: true,
-      timeout: 10000,   // ⏱️ 10 seconds
-      maximumAge: 0
     }
-  );
-}
 
-function goToMap() {
-  const lat = document.getElementById("lat").value;
-  const lon = document.getElementById("lon").value;
+    if (!navigator.geolocation) {
+      fallback();
+      return;
+    }
 
-  if (!lat || !lon) {
-    alert("Please enter both latitude and longitude.");
-    return;
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        localStorage.setItem("lat", pos.coords.latitude);
+        localStorage.setItem("lon", pos.coords.longitude);
+        window.location.href = "map.html";
+      },
+      () => fallback(),
+      { timeout: 5000 }
+    );
   }
 
-  localStorage.setItem("lat", lat);
-  localStorage.setItem("lon", lon);
-  window.location.href = "map.html";
-}
-</script>
-
-
-function goToMap() {
-  localStorage.setItem("lat", document.getElementById("lat").value);
-  localStorage.setItem("lon", document.getElementById("lon").value);
-  window.location.href = "map.html";
-}
+  function goToMap() {
+    const lat = document.getElementById("lat").value;
+    const lon = document.getElementById("lon").value;
+    if (!lat || !lon) {
+      alert("Please enter both latitude and longitude");
+      return;
+    }
+    localStorage.setItem("lat", lat);
+    localStorage.setItem("lon", lon);
+    window.location.href = "map.html";
+  }
 </script>
 
 </body>
